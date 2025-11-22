@@ -12,7 +12,7 @@ public class QuizManager : MonoBehaviour
     public Timer timerScript;
     public Image crrectImage;
     public Image incrrectImage;
-
+    public ParticleSystem cracker;
 
     private QuestionData _current;
     private int _curQuestionNum = -1;
@@ -90,6 +90,9 @@ public class QuizManager : MonoBehaviour
             crrectImage.enabled = true;
             _crrectCount += 1;
             ResultManager.Answer(true);
+            cracker.Stop();
+            cracker.Clear();
+            cracker.Play();
         }
         else
         {
@@ -115,11 +118,6 @@ public class QuizManager : MonoBehaviour
                 LoadNextQuestion();
             }
         }
-
-        //if(_isFinished)
-        //{
-        //    LoadNextScene();
-        //}
         _IsSelect = false;
     }
 
