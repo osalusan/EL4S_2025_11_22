@@ -9,14 +9,31 @@ public class QuizManager : MonoBehaviour
     public Text questionText;
     public Button[] optionButtons;
     public Image optionImage;
+    public Timer timerScript;
 
     private QuestionData _current;
     private int _curQuestionNum = -1;
+    private bool _IsSelect = false;
     private bool _isFinished = false;
 
     void Start()
     {
         LoadNextQuestion();
+    }
+    private void Update()
+    {
+        if(_IsSelect)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Next();
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                Next();
+            }
+        }
     }
 
     void LoadNextQuestion()
@@ -25,7 +42,7 @@ public class QuizManager : MonoBehaviour
 
         if(_curQuestionNum >= database.questions.Length -1)
         {
-            FinishQuestion();
+            _isFinished = true;
             return;
         }
         else
@@ -49,6 +66,9 @@ public class QuizManager : MonoBehaviour
 
             optionImage.sprite = _current.image;
         }
+
+        timerScript.StartTimer();
+        _IsSelect = false;
     }
 
     void OnPressOption(int index)
@@ -63,14 +83,24 @@ public class QuizManager : MonoBehaviour
         {
             Debug.Log("ïsê≥âÅI");
         }
-
-        LoadNextQuestion();
+        _IsSelect = true;
     }
 
-    void FinishQuestion()
+    void Next()
     {
-        _isFinished = true;
-        Invoke(nameof(LoadNextScene), 3f);
+        if (_IsSelect)
+        {
+            if (!_isFinished)
+            {
+                LoadNextQuestion();
+            }
+            else
+            {
+                LoadNextScene();
+            }
+        }
+
+        _IsSelect = false;
     }
 
     void LoadNextScene()

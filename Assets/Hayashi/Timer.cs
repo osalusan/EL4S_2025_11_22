@@ -5,10 +5,15 @@ public class Timer : MonoBehaviour
 {
     [Header("設定")]
     public float startTime = 10f;
-    public bool autoStart = true;   
+    public bool autoStart = true;
+    public Material mat;
+
+    public float blurAttenuationSpeed = 0.005f;
+    public float blurAttenuationStartTime = 3.0f;
 
     [Header("UI")]
     public Text timerText;
+    public Image questionImage;
 
     private float currentTime;
     private bool isCounting = false;
@@ -34,13 +39,22 @@ public class Timer : MonoBehaviour
             OnTimerEnd();
         }
 
+        if(currentTime < blurAttenuationStartTime)
+        {
+            float blur = mat.GetFloat("_BlurAmount");
+            blur -= blurAttenuationSpeed * Time.deltaTime;
+            mat.SetFloat("_BlurAmount", blur);
+        }
+
         UpdateText();
     }
 
     public void StartTimer()
     {
         currentTime = startTime;
+        mat.SetFloat("_BlurAmount", 0.02f);
         isCounting = true;
+        questionImage.color = Color.white;
         UpdateText();
     }
 
@@ -57,7 +71,6 @@ public class Timer : MonoBehaviour
 
     void OnTimerEnd()
     {
-        Debug.Log("タイマー終了！");
-        // 必要ならここで処理を書く（シーン遷移など）
+        questionImage.color = Color.black;
     }
 }
