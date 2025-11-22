@@ -14,6 +14,12 @@ public class QuizManager : MonoBehaviour
     public Image incrrectImage;
     public ParticleSystem cracker;
 
+    [Header("サウンド")]
+    public AudioSource audioSource;
+    public AudioClip crrectSound;
+    public AudioClip incrrectSound;
+    public AudioClip questionSound;
+
     private QuestionData _current;
     private int _curQuestionNum = -1;
     private bool _IsSelect = false;
@@ -78,6 +84,7 @@ public class QuizManager : MonoBehaviour
         }
 
         timerScript.StartTimer();
+        audioSource.PlayOneShot(questionSound);
     }
 
     void OnPressOption(int index)
@@ -93,12 +100,14 @@ public class QuizManager : MonoBehaviour
             cracker.Stop();
             cracker.Clear();
             cracker.Play();
+            audioSource.PlayOneShot(crrectSound);
         }
         else
         {
             // 不正解
             incrrectImage.enabled = true;
             ResultManager.Answer(false);
+            audioSource.PlayOneShot(incrrectSound);
         }
         _IsSelect = true;
         _isAncer = true;
