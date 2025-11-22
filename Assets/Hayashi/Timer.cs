@@ -14,13 +14,16 @@ public class Timer : MonoBehaviour
     [Header("UI")]
     public Text timerText;
     public Image questionImage;
+    public Image needleImage;
 
-    private float currentTime;
+    public float currentTime;
     private bool isCounting = false;
+    private float _rotationSpeed = 0f;
 
     void Start()
     {
         currentTime = startTime;
+        _rotationSpeed = 360f / startTime;
 
         if (autoStart)
             StartTimer();
@@ -38,8 +41,12 @@ public class Timer : MonoBehaviour
             isCounting = false;
             OnTimerEnd();
         }
+        else
+        {
+            needleImage.rectTransform.localEulerAngles -= new Vector3(0f, 0f, _rotationSpeed * Time.deltaTime);
+        }
 
-        if(currentTime < blurAttenuationStartTime)
+        if (currentTime < blurAttenuationStartTime)
         {
             float blur = mat.GetFloat("_BlurAmount");
             blur -= blurAttenuationSpeed * Time.deltaTime;
@@ -55,6 +62,7 @@ public class Timer : MonoBehaviour
         mat.SetFloat("_BlurAmount", 0.02f);
         isCounting = true;
         questionImage.color = Color.white;
+        needleImage.rectTransform.localEulerAngles = new Vector3(0f, 0f, 0f);
         UpdateText();
     }
 

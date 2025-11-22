@@ -13,19 +13,43 @@ MonoBehaviour:
   m_Name: QuestionDatabase
   m_EditorClassIdentifier: 
   questions:
-  - questionText: "1\u756A\u304C\u6B63\u89E3"
+  - questionText: "\u3053\u3053\u306F\u3069\u3053\u3067\u3057\u3087\u3046\uFF1F"
     choices:
-    - 1
-    - 2
-    - 3
-    - 4
-    image: {fileID: 4780067196784152879, guid: bd7677c75e673314081ff483158f796e, type: 3}
-    correctIndex: 1
-  - questionText: "\u3053\u308C\u306F\u8AB0\uFF1F"
-    choices:
-    - a
-    - "\u6751\u702C\u514B\u78E8Vtuber\u306E\u59FF"
-    - c
-    - d
-    image: {fileID: 7423357446568247091, guid: 966fdc4427a786d458be264ba99623df, type: 3}
+    - "\u30B9\u30AB\u30A4\u30C4\u30EA\u30FC"
+    - "\u30B3\u30AF\u30FC\u30F3\u30BF\u30EF\u30FC"
+    - "\u6771\u4EAC\u30BF\u30EF\u30FC"
+    - "\u901A\u5929\u95A3"
+    image: {fileID: 3390421689815337744, guid: 063e550f5bef8d741a7fcab2067edadd, type: 3}
     correctIndex: 2
+  - questionText: "\u3053\u308C\u306F\u3069\u306E\u6559\u5BA4\uFF1F"
+    choices:
+    - "\u5927\u6559\u5BA4(312\u6559\u5BA4)"
+    - "\u4E2D\u6559\u5BA4(285\u6559\u5BA4)"
+    - "\u5C0F\u6559\u5BA4(243\u6559\u5BA4)"
+    - "\u30DE\u30B7\u30F3\u30EB\u30FC\u30E0(343\u6559\u5BA4)"
+    image: {fileID: -3459217766813714227, guid: 187efb5bb946726408e62e65f5aeb2c1, type: 3}
+    correctIndex: 1
+  - questionText: "\u3053\u308C\u306F\u4F55\uFF1F"
+    choices:
+    - "\u7ACB\u5165\u7981\u6B62\u30DD\u30B9\u30BF\u30FC"
+    - "30\u968E\u306B\u3042\u308B\u30DD\u30B9\u30BF\u30FC"
+    - "MODE\u306E\u30DD\u30B9\u30BF\u30FC"
+    - "\u9632\u707D\u30AC\u30A4\u30C9"
+    image: {fileID: 0}
+    correctIndex: 4
+  - questionText: "\u8AB0\u3067\u3057\u3087\u3046\uFF1F"
+    choices:
+    - "\u82B1\u5C71\u5148\u751F"
+    - "\u6CBC\u7530(\u5143)\u5148\u751F"
+    - "\u9F4B\u85E4\u5148\u751F"
+    - "\u5CA9\u6C38\u5148\u751F"
+    image: {fileID: -2851530937323767372, guid: 2bbefcee4f26d6d4a999e954202e5c9f, type: 3}
+    correctIndex: 3
+  - questionText: "\u8AB0\u3067\u3057\u3087\u3046\uFF1F"
+    choices:
+    - "\u571F\u5C45\u5148\u751F"
+    - "\u95A2\u8C37\u5148\u751F"
+    - "\u6751\u702C\u5148\u751F"
+    - "\u82B1\u5C71\u5148\u751F"
+    image: {fileID: 5218823490559287709, guid: fbaf32b46666843459b5eee718049780, type: 3}
+    correctIndex: 3

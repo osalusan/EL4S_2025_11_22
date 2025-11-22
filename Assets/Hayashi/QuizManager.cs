@@ -10,11 +10,16 @@ public class QuizManager : MonoBehaviour
     public Button[] optionButtons;
     public Image optionImage;
     public Timer timerScript;
+    public Image crrectImage;
+    public Image incrrectImage;
+
 
     private QuestionData _current;
     private int _curQuestionNum = -1;
     private bool _IsSelect = false;
     private bool _isFinished = false;
+    private bool _isAncer = false;
+    private float _crrectCount = 0;
 
     void Start()
     {
@@ -40,9 +45,14 @@ public class QuizManager : MonoBehaviour
     {
         if (database == null) return;
 
-        if(_curQuestionNum >= database.questions.Length -1)
+        _IsSelect = false;
+        crrectImage.enabled = false;
+        incrrectImage.enabled = false;
+
+        if (_curQuestionNum >= database.questions.Length -1)
         {
             _isFinished = true;
+            LoadNextScene();
             return;
         }
         else
@@ -68,43 +78,60 @@ public class QuizManager : MonoBehaviour
         }
 
         timerScript.StartTimer();
-        _IsSelect = false;
     }
 
     void OnPressOption(int index)
     {
-        if (_isFinished) return;
+        if (_isFinished || _isAncer) return;
 
         if (index == _current.correctIndex -1)
         {
-            Debug.Log("正解！");
+            // 正解
+            crrectImage.enabled = true;
+            _crrectCount += 1;
         }
         else
         {
-            Debug.Log("不正解！");
+            // 不正解
+            incrrectImage.enabled = true;
         }
         _IsSelect = true;
+        _isAncer = true;
+        timerScript.currentTime = 0;
+
+        Invoke(nameof(ZeroBlur), 2f);
     }
 
     void Next()
     {
+        if (_isAncer) return;
+
         if (_IsSelect)
         {
             if (!_isFinished)
             {
                 LoadNextQuestion();
             }
-            else
-            {
-                LoadNextScene();
-            }
         }
 
+        //if(_isFinished)
+        //{
+        //    LoadNextScene();
+        //}
         _IsSelect = false;
     }
 
     void LoadNextScene()
     {
         SceneManager.LoadScene("ResultScene");
+    }
+
+    void ZeroBlur()
+    {
+        timerScript.mat.SetFloat("_BlurAmount", 0f);
+        timerScript.questionImage.color = Color.white;
+        crrectImage.enabled = false;
+        incrrectImage.enabled = false;
+        _isAncer = false;
     }
 }
