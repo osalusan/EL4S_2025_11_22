@@ -478,7 +478,7 @@ MonoBehaviour:
     accuracyRate: 0
   _stampSpeed: 15
   _startSize: 12
-  _changeSceneName: ResultTestScene
+  _changeSceneName: TitleScene
   _changeSceneKey: 32
   _waitInputTime: 1
 --- !u!4 &682331000

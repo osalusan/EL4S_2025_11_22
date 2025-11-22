@@ -812,6 +812,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: QuizManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8065283214688516908, guid: 1abfb948504651e4da59c608cf15bf8f, type: 3}
+      propertyPath: initBlur
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065283214688516908, guid: 1abfb948504651e4da59c608cf15bf8f, type: 3}
+      propertyPath: blurAttenuationSpeed
+      value: 0.005
+      objectReference: {fileID: 0}
     - target: {fileID: 8132323675914187428, guid: 1abfb948504651e4da59c608cf15bf8f, type: 3}
       propertyPath: cracker
       value: 
