@@ -16,13 +16,15 @@ public class Result : MonoBehaviour
 	[Header("Text")]
 	[SerializeField] Text _questionText = null;
 	[SerializeField] Text _correctText = null;
+	[SerializeField] Text _spaceText = null;
 
 	[Header("Stamp")]
 	[SerializeField] GameObject _stamp;
-	[SerializeField] Image[] _stampSprite = new Image[1];
+	[SerializeField] Image _stampSprite = null;
 	[SerializeField] Stamp[] _accuracyStamp = new Stamp[1];
 	[SerializeField, Min(0.1f)] float _stampSpeed = 10f;
 	[SerializeField, Min(1.1f)] float _startSize = 10f;
+	bool _addAlpha = true;
 
 
 	[Header("SceneChange")]
@@ -43,6 +45,15 @@ public class Result : MonoBehaviour
 			_correctText.text = correctNum.ToString();
 		}
 		StampSet(questionNum, correctNum);
+		if (_spaceText)
+		{
+			Color col = _spaceText.color;
+			col.a = 0f;
+			_spaceText.color = col;
+		}
+
+		_addAlpha = true;
+
 
 		//ì¸óÕâ¬î\Ç‹Ç≈è≠Çµéûä‘ÇãÛÇØÇÈ
 		yield return new WaitForSeconds(_waitInputTime);
@@ -61,26 +72,34 @@ public class Result : MonoBehaviour
 			SceneManager.LoadScene(_changeSceneName);
 		}
 	}
-	private void Update()
+	private void FixedUpdate()
 	{
-		StampView();
+		if(StampView())
+		{
+			AddTextColorAlpha(_spaceText);
+		}
 	}
 
-	void StampView()
+	bool StampView()
 	{
-		if (_stamp.transform.localScale == Vector3.one) { return; }
+		if (_stamp.transform.localScale == Vector3.one)
+		{
+			return true;
+		}
 
 		Vector3 size = _stamp.transform.localScale;
 		float s = size.x;
 		s -= Time.deltaTime * _stampSpeed;
-		if (s < 0.98f)
+		if (s < 0.95f)
 		{
 			_stamp.transform.localScale = Vector3.one;
+			return true;
 		}
 		else
 		{
 			_stamp.transform.localScale = new Vector3(s, s, 1f);
 		}
+		return false;
 	}
 
 	void StampSet(float questionNum, float correctNum)
@@ -89,10 +108,7 @@ public class Result : MonoBehaviour
 
 		if (questionNum == 0)
 		{
-			for (int i = 0; i < _stampSprite.Length; i++)
-			{
-				_stampSprite[i].sprite = _accuracyStamp[_accuracyStamp.Length - 1].texture;
-			}
+			_stampSprite.sprite = _accuracyStamp[_accuracyStamp.Length - 1].texture;
 			return;
 		}
 
@@ -101,12 +117,32 @@ public class Result : MonoBehaviour
 		{
 			if (_accuracyStamp[i].accuracyRate <= accuracy)
 			{
-				for (int j = 0; j < _stampSprite.Length; j++)
-				{
-
-					_stampSprite[j].sprite = _accuracyStamp[i].texture;
-				}
+				_stampSprite.sprite = _accuracyStamp[i].texture;
 				return;
+			}
+		}
+	}
+
+	void AddTextColorAlpha(Text text)
+	{
+		if (_addAlpha)
+		{
+			if (text.color.a <= 1f)
+			{
+				Color col = text.color;
+				col.a += Time.deltaTime;
+				_addAlpha = (col.a < 1f);
+				text.color = col;
+			}
+		}
+		else
+		{
+			if (text.color.a >= 0f)
+			{
+				Color col = text.color;
+				col.a -= Time.deltaTime;
+				_addAlpha = !(col.a > 0f);
+				text.color = col;
 			}
 		}
 	}
