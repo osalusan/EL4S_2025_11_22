@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a086ef493adb447abc7ab7873a1bf3, type: 3}
+  m_Name: QuestionDatabase
+  m_EditorClassIdentifier: 
+  questions:
+  - questionText: "1\u756A\u304C\u6B63\u89E3"
+    choices:
+    - 1
+    - 2
+    - 3
+    - 4
+    image: {fileID: 4780067196784152879, guid: bd7677c75e673314081ff483158f796e, type: 3}
+    correctIndex: 1
+  - questionText: "\u3053\u308C\u306F\u8AB0\uFF1F"
+    choices:
+    - a
+    - "\u6751\u702C\u514B\u78E8Vtuber\u306E\u59FF"
+    - c
+    - d
+    image: {fileID: 7423357446568247091, guid: 966fdc4427a786d458be264ba99623df, type: 3}
+    correctIndex: 2
