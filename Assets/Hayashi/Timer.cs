@@ -8,6 +8,7 @@ public class Timer : MonoBehaviour
     public bool autoStart = true;
     public Material mat;
 
+    public float initBlur = 0.02f;
     public float blurAttenuationSpeed = 0.005f;
     public float blurAttenuationStartTime = 3.0f;
 
@@ -59,7 +60,7 @@ public class Timer : MonoBehaviour
     public void StartTimer()
     {
         currentTime = startTime;
-        mat.SetFloat("_BlurAmount", 0.02f);
+        mat.SetFloat("_BlurAmount", initBlur);
         isCounting = true;
         questionImage.color = Color.white;
         needleImage.rectTransform.localEulerAngles = new Vector3(0f, 0f, 0f);

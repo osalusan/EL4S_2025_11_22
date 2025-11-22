@@ -89,11 +89,13 @@ public class QuizManager : MonoBehaviour
             // ³‰ğ
             crrectImage.enabled = true;
             _crrectCount += 1;
+            ResultManager.Answer(true);
         }
         else
         {
             // •s³‰ğ
             incrrectImage.enabled = true;
+            ResultManager.Answer(false);
         }
         _IsSelect = true;
         _isAncer = true;
